@@ -5,11 +5,53 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>User details</title>
     </head>
     <body>
 
-    <h1>Hello world</h1>
+    <h2>User details</h2>
+
+    <script>
+        const url = new URL(location.href);
+        const userDetails = JSON.parse(url.searchParams.get('userId'));
+
+        const userInfo = document.createElement('div');
+        const btn = document.createElement('button');
+        btn.innerText = 'post of current user';
+        document.body.append(userInfo, btn);
+
+        for (const userDetailsKey in userDetails) {
+            const p = document.createElement('p');
+            const value = userDetails[userDetailsKey];
+
+            if (typeof value === 'object' && value !== null) {
+                p.innerText = `${userDetailsKey} - ${JSON.stringify(value)}`;
+            } else {
+                p.innerText = `${userDetailsKey} - ${value}`;
+            }
+            userInfo.appendChild(p);
+        }
+
+
+        btn.onclick = function () {
+            fetch(`https://jsonplaceholder.typicode.com/users/${userDetails.id}/posts`)
+                .then(response => response.json())
+                .then(posts => {
+                    const postsInfo = document.createElement('div');
+                    document.body.appendChild(postsInfo);
+
+                    posts.forEach(post => {
+                        const postParagraph = document.createElement('p');
+                        postParagraph.innerText = `Post Title: ${post.title};`;
+                        const postLink = document.createElement('a');
+                        postLink.href = 'post-details.html?userPosts=' + JSON.stringify(post);
+                        postLink.innerText = 'more details';
+                        postsInfo.append(postParagraph, postLink);
+                    });
+                })
+        }
+
+    </script>
 
     </body>
 </html>

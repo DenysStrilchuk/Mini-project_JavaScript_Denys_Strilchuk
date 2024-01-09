@@ -5,12 +5,30 @@
       <meta name="viewport"
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Document</title>
+      <title>Post details</title>
   </head>
   <body>
+  <h2>Post details</h2>
 
+  <script>
+      const url = new URL(location.href);
+      const userPosts = JSON.parse(url.searchParams.get('userPosts'));
+      console.log(userPosts);
+      const postDetails = document.createElement('div');
+      document.body.appendChild(postDetails);
 
-
+      // for (const postDetailsKey in postDetails) {
+      //     const p = document.createElement('p');
+      //     const value = postDetails[postDetailsKey];
+      //
+      //     if (typeof value === 'object' && value !== null) {
+      //         p.innerText = `${postDetailsKey} - ${JSON.stringify(value)}`;
+      //     } else {
+      //         p.innerText = `${postDetailsKey} - ${value}`;
+      //     }
+      //     postDetails.appendChild(p);
+      // }
+  </script>
 
   </body>
 </html>

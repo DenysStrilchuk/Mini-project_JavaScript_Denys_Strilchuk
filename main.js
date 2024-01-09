@@ -35,7 +35,7 @@ fetch('https://jsonplaceholder.typicode.com/users').then(response => response.js
         const btn = document.createElement('button');
         btn.innerText = 'details';
         btn.onclick = function () {
-            document.location.href = 'user-details.html?id=' + value.id;
+            document.location.href = 'user-details.html?userId=' + JSON.stringify(value);
         }
         userDiv.append(userInfo, btn);
         document.body.appendChild(userDiv);
