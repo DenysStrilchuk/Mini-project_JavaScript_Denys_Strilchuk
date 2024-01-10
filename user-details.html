@@ -7,23 +7,48 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>User details</title>
         <style>
+            body {
+                background-color: rgb(235,236,240);
+            }
             .userInf {
+                font-size: 20px;
                 border: 1px solid #ccc;
                 padding-left: 15px;
+                background-color: rgb(248,245,112);
+                color: rgb(19,19,19);
             }
             .btnStyle {
                 width: 90%;
+                height: 40px;
+                font-size: 18px;
+                background-color: rgb(138,209,219);
+                color: rgb(49,48,53);
                 display: block;
                 margin: 20px auto;
+                border: none;
+                border-radius: 10px;
+            }
+            .btnStyle:hover {
+                background-color: rgb(128,201,209);
             }
             .postInf {
                 border: 1px solid #ccc;
                 display: inline-block;
-                width: 18%; /* 100% / 5 - margin */
+                width: 18%;
                 margin: 10px;
                 padding: 10px;
                 box-sizing: border-box;
                 vertical-align: top;
+                background-color: rgb(230,220,174);
+            }
+            #btnBck {
+                width: 120px;
+                background-color: rgb(138,209,219);
+                color: rgb(49,48,53);
+            }
+            .h2 {
+                display: flex;
+                justify-content: space-between;
             }
         </style>
     </head>
@@ -41,6 +66,7 @@
         const btn = document.createElement('button');
         btn.classList.add('btnStyle');
         btn.innerText = 'post of current user';
+
         document.body.append(userInfo, btn);
 
         for (const userDetailsKey in userDetails) {
@@ -72,7 +98,7 @@
 
                         const postLink = document.createElement('a');
                         postLink.href = 'post-details.html?userPosts=' + JSON.stringify(post);
-                        postLink.innerText = 'more details';
+                        postLink.innerText = 'For more details: click here';
 
                         postsInfo.append(postParagraph, postLink);
                     });
