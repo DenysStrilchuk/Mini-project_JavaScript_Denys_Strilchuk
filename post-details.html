@@ -10,25 +10,38 @@
   <body>
   <h2>Post details</h2>
 
+  <div id="postDetails"></div>
+  <div id="comments"></div>
+
   <script>
       const url = new URL(location.href);
       const userPosts = JSON.parse(url.searchParams.get('userPosts'));
-      console.log(userPosts);
-      const postDetails = document.createElement('div');
-      document.body.appendChild(postDetails);
+      const postDetails = document.getElementById('postDetails');
 
-      // for (const postDetailsKey in postDetails) {
-      //     const p = document.createElement('p');
-      //     const value = postDetails[postDetailsKey];
-      //
-      //     if (typeof value === 'object' && value !== null) {
-      //         p.innerText = `${postDetailsKey} - ${JSON.stringify(value)}`;
-      //     } else {
-      //         p.innerText = `${postDetailsKey} - ${value}`;
-      //     }
-      //     postDetails.appendChild(p);
-      // }
+      for (const key in userPosts) {
+          const p = document.createElement('p');
+          const value = userPosts[key];
+          if (typeof value === 'object' && value !== null) {
+              p.innerText = `${key} - ${JSON.stringify(value)}`;
+          } else {
+              p.innerText = `${key} - ${value}`;
+          }
+          postDetails.appendChild(p);
+      }
+
+      const postId = userPosts.id;
+
+      fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
+          .then(response => response.json())
+          .then(comments => {
+              comments.forEach(comment => {
+                  const commentParagraph = document.createElement('p');
+                  commentParagraph.innerText = `Comment: ${comment.body}`;
+                  const commentsContainer = document.getElementById('comments');
+                  commentsContainer.appendChild(commentParagraph);
+              });
+          });
+
   </script>
-
   </body>
 </html>

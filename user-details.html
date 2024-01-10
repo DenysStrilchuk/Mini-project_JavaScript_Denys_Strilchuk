@@ -6,6 +6,26 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>User details</title>
+        <style>
+            .userInf {
+                border: 1px solid #ccc;
+                padding-left: 15px;
+            }
+            .btnStyle {
+                width: 90%;
+                display: block;
+                margin: 20px auto;
+            }
+            .postInf {
+                border: 1px solid #ccc;
+                display: inline-block;
+                width: 18%; /* 100% / 5 - margin */
+                margin: 10px;
+                padding: 10px;
+                box-sizing: border-box;
+                vertical-align: top;
+            }
+        </style>
     </head>
     <body>
 
@@ -16,7 +36,10 @@
         const userDetails = JSON.parse(url.searchParams.get('userId'));
 
         const userInfo = document.createElement('div');
+        userInfo.classList.add('userInf');
+
         const btn = document.createElement('button');
+        btn.classList.add('btnStyle');
         btn.innerText = 'post of current user';
         document.body.append(userInfo, btn);
 
@@ -37,15 +60,20 @@
             fetch(`https://jsonplaceholder.typicode.com/users/${userDetails.id}/posts`)
                 .then(response => response.json())
                 .then(posts => {
-                    const postsInfo = document.createElement('div');
-                    document.body.appendChild(postsInfo);
+
 
                     posts.forEach(post => {
+                        const postsInfo = document.createElement('div');
+                        postsInfo.classList.add('postInf');
+                        document.body.appendChild(postsInfo);
+
                         const postParagraph = document.createElement('p');
                         postParagraph.innerText = `Post Title: ${post.title};`;
+
                         const postLink = document.createElement('a');
                         postLink.href = 'post-details.html?userPosts=' + JSON.stringify(post);
                         postLink.innerText = 'more details';
+
                         postsInfo.append(postParagraph, postLink);
                     });
                 })

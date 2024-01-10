@@ -6,11 +6,36 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Main page</title>
+        <style>
+            .user-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .user-block {
+                width: 48%; /* 48% to leave some gap between the blocks */
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
+            .user-info {
+                margin-bottom: 10px;
+            }
+
+            .user-btn {
+                display: block;
+                margin-top: 10px;
+                width: 150px;
+            }
+        </style>
     </head>
     <body>
 
-
+        <div class="user-container"></div>
 
         <script src="main.js"></script>
+
     </body>
 </html>
